@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "kr.sdbk.ui:coordinator"
+    namespace = "kr.sdbk.ui.coordinator"
 }
 
 dependencies {

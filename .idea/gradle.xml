@@ -34,12 +34,19 @@
             <option value="$PROJECT_DIR$/core/local" />
             <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/core/test-config" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/ui/coordinator" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/main" />
+            <option value="$PROJECT_DIR$/features/main/api" />
+            <option value="$PROJECT_DIR$/features/main/impl" />
             <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/onboarding/api" />
             <option value="$PROJECT_DIR$/features/onboarding/impl" />
+            <option value="$PROJECT_DIR$/features/support" />
+            <option value="$PROJECT_DIR$/features/support/api" />
+            <option value="$PROJECT_DIR$/features/support/impl" />
           </set>
         </option>
       </GradleProjectSettings>

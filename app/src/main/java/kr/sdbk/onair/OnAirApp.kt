@@ -1,28 +1,26 @@
 package kr.sdbk.onair
 
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import kr.sdbk.navigation.OnAirNavHost
-import kr.sdbk.onair.navigation.onAirEntryProvider
-import kr.sdbk.onboarding.api.navigation.OnboardingNavRoute
+import kr.sdbk.onair.navigation.OnAirNavHost
+import kr.sdbk.onair.state.OnAirAppState
 
 /**
  * Main app entry point with Navigation 3 integration
  */
 @Composable
 internal fun OnAirApp(
-    isOnboardingComplete: Boolean = false,
+    appState: OnAirAppState,
     modifier: Modifier = Modifier
 ) {
-    OnAirNavHost(
-        startRoute = OnboardingNavRoute.Welcome,
-        modifier = modifier.fillMaxSize(),
-        entryProvider = onAirEntryProvider(
-            onOnboardingComplete = {
-                // Navigate to Home when onboarding is complete
-                // In a real app, this would also save the onboarding completion state
-            }
+    Scaffold(
+        modifier = modifier
+    ) { innerPadding ->
+        OnAirNavHost(
+            navigator = appState.navigator,
+            modifier = Modifier.padding(innerPadding)
         )
-    )
+    }
 }

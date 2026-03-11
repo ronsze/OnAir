@@ -16,4 +16,5 @@ dependencies {
 
     api(libs.bundles.navigation)
     implementation(libs.kotlinx.serialization.json)
+
 }

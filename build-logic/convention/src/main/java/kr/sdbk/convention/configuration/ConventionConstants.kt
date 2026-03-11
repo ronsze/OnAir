@@ -4,7 +4,7 @@ internal object ConventionConstants {
     const val GRADLE_FILE = "build.gradle.kts"
 
     const val DIR_CORE = "core"
-    const val DIR_FEATURE = "feature"
+    const val DIR_FEATURE = "features"
     const val DIR_API = "api"
     const val DIR_IMPL = "impl"
 

@@ -1,0 +1,49 @@
+PROMPT: AI fast-parse optimized. Convention reference. Human readability not required.
+TRIGGER: Referenced by FEATURE_PROMPT
+
+PURPOSE: Define naming conventions and standards for OnAir project
+
+CONVENTIONS:
+
+1. BACK NAVIGATION:
+   - UiEvents: onBackPressed
+   - Events: goBack
+   - Binding: events.goBack = navigator::goBack
+
+2. NAVIGATION NAMING:
+   - Route: {N}Route (e.g., SplashRoute)
+   - Navigate function: navigateTo{N}() (e.g., navigateToSplash())
+   - Module NavKey: {Module}NavKey (e.g., OnboardingNavKey)
+   - Navigator extension: {module}Navigator (e.g., onboardingNavigator)
+
+3. SCREEN COMPONENTS:
+   - Screen: {N}Screen
+   - View: {N}View
+   - Events: {N}Events
+   - UiEvents: {N}UiEvents
+   - State: {N}State
+   - Intent: {N}Intent
+   - Effect: {N}Effect
+   - ViewModel: {N}ViewModel
+
+4. EVENT NAMING BY TYPE:
+   - Back navigation: onBackPressed (UiEvents), goBack (Events)
+   - Navigate to X: navigateTo{X} (Events callback)
+   - Button click: on{Action}Click (e.g., onSubmitClick)
+   - Text change: on{Field}Change (e.g., onEmailChange)
+   - Toggle: on{Item}Toggle (e.g., onNotificationToggle)
+   - Submit: on{Action} (e.g., onSubmit)
+
+5. VISIBILITY:
+   - All screen-level: internal
+
+6. UIEVENTS BINDING RULE:
+   - If needs ViewModel (data ops): vm.handleIntent()
+   - If pure navigation: direct events.XXX access
+
+7. PACKAGE:
+   - pkg: kr.sdbk.{feature}.impl.{screen}
+
+8. MODULE NAVIGATION (if {parent}/api exists):
+   - api/{Module}NavKey.kt: interface, navigateTo{N}(), {N}Route
+   - impl/{Module}Navigator.kt: OnAirEntryProviderScope ext, entry<{N}Route>

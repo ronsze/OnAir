@@ -44,4 +44,12 @@ include(":core:domain:model")
 
 include(":features:onboarding:impl")
 include(":features:onboarding:api")
+
+include(":features:main:api")
+include(":features:main:impl")
+
+include(":features:support:api")
+include(":features:support:impl")
+
 include(":core:ui:coordinator")
+include(":core:test-config")

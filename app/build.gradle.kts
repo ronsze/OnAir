@@ -28,10 +28,11 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.navigation)
+    implementation(projects.core.ui.coordinator)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(libs.activity.compose)
+    implementation(libs.lifecycle.viewmodel.navigation3)
 }

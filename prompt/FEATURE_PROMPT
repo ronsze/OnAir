@@ -1,0 +1,201 @@
+PROMPT: AI fast-parse optimized. Human readability not required.
+TRIGGER: "xx화면 생성", "create xxScreen", "make xx screen", "xx피쳐 추가", "create xxFeature"
+
+RULE: Parse user command -> identify SECTION -> only read that SECTION
+- If command contains "화면", "Screen", "screen" -> read [SECTION: SCREEN CREATION] only
+- If command contains "피쳐", "Feature", "feature" -> read [SECTION: FEATURE CREATION] only
+
+BASE: CONVENTION_PROMPT (apply all naming/struct rules from it)
+MUST: CONVENTION_PROMPT rules ALWAYS apply to ALL generated code
+
+================================================================================
+[SECTION: FEATURE CREATION]
+TRIGGER: "{feature}피쳐 추가", "create {feature}Feature"
+
+STRUCTURE:
+features/{feature}/
+├── api/
+│   ├── build.gradle.kts              # plugin: onair.feature.api
+│   └── src/main/java/kr/sdbk/{feature}/api/
+│       └── {Feature}NavKey.kt         # interface {Feature}NavKey
+└── impl/
+    ├── build.gradle.kts              # plugin: onair.feature.impl
+    └── src/main/java/kr/sdbk/{feature}/impl/
+        └── {Feature}Navigator.kt      # OnAirEntryProviderScope.{feature}Navigator()
+
+FILES:
+
+1. api/build.gradle.kts:
+```kotlin
+plugins {
+    alias(libs.plugins.onair.feature.api)
+}
+
+android {
+    namespace = "kr.sdbk.{feature}.api"
+}
+```
+
+2. impl/build.gradle.kts:
+```kotlin
+plugins {
+    alias(libs.plugins.onair.feature.impl)
+}
+
+android {
+    namespace = "kr.sdbk.{feature}.impl"
+}
+```
+
+3. settings.gradle.kts (add):
+```kotlin
+include(":features:{feature}:api")
+include(":features:{feature}:impl")
+```
+
+4. api/{Feature}NavKey.kt:
+```kotlin
+package kr.sdbk.{feature}.api
+
+import kotlinx.serialization.Serializable
+import kr.sdbk.navigation.OnAirNavKey
+
+interface {Feature}NavKey : OnAirNavKey
+```
+
+5. impl/{Feature}Navigator.kt (initial skeleton, empty):
+```kotlin
+package kr.sdbk.{feature}.impl
+
+import kr.sdbk.navigation.OnAirEntryProviderScope
+import kr.sdbk.navigation.OnAirNavigator
+
+fun OnAirEntryProviderScope.{feature}Navigator(
+    navigator: OnAirNavigator
+) {
+    // Add entry<{N}Route> { ... } when screens are created
+}
+```
+
+================================================================================
+[SECTION: SCREEN CREATION]
+TRIGGER: "{screen}화면 생성", "create {screen}Screen", "make {screen} screen"
+
+ARCH: MVI (State+Intent+Effect)
+BASE: BaseViewModel<S,I,E>, State/Intent/Effect from kr.sdbk.coordinator.viewmodel
+
+FILES (3):
+- {N}Screen.kt
+- {N}Contracts.kt  
+- {N}ViewModel.kt
+
+STRUCT:
+1. Screen(@Composable internal fun {N}Screen(events: {N}Events, vm: {N}ViewModel=hiltViewModel()))
+   - Top: data class {N}Events(), data class {N}UiEvents()  // EMPTY initially, add only when needed
+   - val uiState by vm.uiState.collectAsStateWithLifecycle()
+   - val uiEvents = remember{{N}UiEvents()}
+   - {N}View(uiState, uiEvents)
+   - LaunchedEffect(Unit){vm.effect.collect{when(it){...}}}  // ONLY if Effect has members
+
+2. View(@Composable private fun {N}View(uiState: {N}State, uiEvents: {N}UiEvents))
+
+3. Contracts:
+   - internal data object {N}State : State
+   - internal sealed interface {N}Intent : Intent  // EMPTY, add data class when needed
+   - internal sealed interface {N}Effect : Effect  // EMPTY, add data object when needed
+
+4. ViewModel(@HiltViewModel internal class {N}ViewModel @Inject constructor() : BaseViewModel<{N}State,{N}Intent,{N}Effect>(initialState={N}State))
+   - override fun handleIntent(i:{N}Intent){when(i){...}} // ONLY if Intent has members
+
+NAVIGATION (if {parent}/api module exists):
+1. api/{Module}NavKey.kt (create if missing):
+   - interface {Module}NavKey : OnAirNavKey
+   - fun OnAirNavigator.navigateTo{N}() = navigate({N}Route)
+   - @Serializable data object {N}Route : {Module}NavKey
+
+2. impl/{Module}Navigator.kt (create if missing, OnAirEntryProviderScope ext):
+   - entry<{N}Route> { val events = remember{{N}Events()}; {N}Screen(events) }
+
+RULES (from CONVENTION_PROMPT - ALWAYS APPLY):
+- pkg: kr.sdbk.{feature}.impl.{screen}
+- modifier: internal
+- naming: {N}Events/{N}UiEvents/{N}State/{N}Intent/{N}Effect/{N}Route
+- uiEvents binding: if needs VM (data) -> vm.handleIntent(); if pure nav -> direct events.XXX
+- handleIntent: when exhaustive, each -> on{Name}(params)
+- on{Name}: private fun per Intent
+- DO NOT add default events (goBack, onBackPressed, etc) - only add what user explicitly requests
+
+TEMPLATE (replace {N} with screen name, empty skeleton):
+```kotlin
+// Screen.kt
+package kr.sdbk.{feature}.impl.{screen}
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
+internal data class {N}Events()
+
+internal data class {N}UiEvents()
+
+@Composable
+internal fun {N}Screen(
+    events: {N}Events,
+    viewModel: {N}ViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiEvents = remember { {N}UiEvents() }
+
+    {N}View(uiState, uiEvents)
+}
+
+@Composable
+private fun {N}View(
+    uiState: {N}State,
+    uiEvents: {N}UiEvents
+) {
+
+}
+
+// Contracts.kt
+package kr.sdbk.{feature}.impl.{screen}
+
+import kr.sdbk.coordinator.viewmodel.Effect
+import kr.sdbk.coordinator.viewmodel.Intent
+import kr.sdbk.coordinator.viewmodel.State
+
+internal data object {N}State : State
+
+internal sealed interface {N}Intent : Intent
+
+internal sealed interface {N}Effect : Effect
+
+// ViewModel.kt
+package kr.sdbk.{feature}.impl.{screen}
+
+import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
+import kr.sdbk.coordinator.viewmodel.BaseViewModel
+
+@HiltViewModel
+internal class {N}ViewModel @Inject constructor() : BaseViewModel<{N}State, {N}Intent, {N}Effect>(
+    initialState = {N}State
+) {
+    override fun handleIntent(intent: {N}Intent) {
+        // Add when(Intent.Member) cases when Intent has members
+    }
+}
+
+// api/{Feature}NavKey.kt (if parent/api exists, add route)
+fun OnAirNavigator.navigateTo{N}() = navigate({N}Route)
+@Serializable data object {N}Route : {Feature}NavKey
+
+// impl/{Feature}Navigator.kt (add entry)
+entry<{N}Route> {
+    val events = remember { {N}Events() }
+    {N}Screen(events)
+}
+```
+================================================================================
