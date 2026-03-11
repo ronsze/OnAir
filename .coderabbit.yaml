@@ -8,7 +8,7 @@ reviews:
     enabled: true
     drafts: false
     base_branches:
-      - main
-      - develop
+      - master
+      - dev
 
 language: k
