@@ -1,1 +1,4 @@
 /build
+/sign
+/src/debug
+/src/release

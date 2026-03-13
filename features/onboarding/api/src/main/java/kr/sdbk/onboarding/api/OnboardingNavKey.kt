@@ -6,7 +6,6 @@ import kr.sdbk.navigation.OnAirNavigator
 
 interface OnboardingNavKey : OnAirNavKey
 
-fun OnAirNavigator.navigateToSplash() = navigate(SplashRoute)
 fun OnAirNavigator.navigateToMaintenance() = navigate(MaintenanceRoute)
 
 @Serializable data object SplashRoute : OnboardingNavKey

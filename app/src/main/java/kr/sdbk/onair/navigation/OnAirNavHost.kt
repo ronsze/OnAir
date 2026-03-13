@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDe
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import kr.sdbk.auth.impl.authNavigator
 import kr.sdbk.main.impl.mainNavigator
 import kr.sdbk.navigation.OnAirNavigator
 import kr.sdbk.onboarding.impl.onboardingNavigator
@@ -28,6 +29,7 @@ internal fun OnAirNavHost(
             onboardingNavigator(navigator)
             mainNavigator(navigator)
             supportNavigator(navigator)
+            authNavigator(navigator)
         }
     )
 }
