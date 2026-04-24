@@ -1,4 +1,4 @@
-package kr.sdbk.domain.logic.usecase
+package kr.sdbk.domain.logic.usecase.channel
 
 import kr.sdbk.domain.model.Category
 

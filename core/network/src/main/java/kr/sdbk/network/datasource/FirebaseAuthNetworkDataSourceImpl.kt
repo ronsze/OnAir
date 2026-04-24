@@ -9,12 +9,13 @@ import kr.sdbk.data.datasource.network.AuthNetworkDataSource
 import kr.sdbk.domain.model.SocialType
 import kr.sdbk.domain.model.User
 import kr.sdbk.network.api.AuthApi
+import kr.sdbk.network.di.ChzzkApi
 import kr.sdbk.network.mapper.AuthMapper.toDomain
 import kr.sdbk.network.model.RequestCustomTokenBody
 import retrofit2.Retrofit
 
 internal class FirebaseAuthNetworkDataSourceImpl @Inject constructor(
-    retrofit: Retrofit
+    @ChzzkApi retrofit: Retrofit
 ) : AuthNetworkDataSource {
     private val api = retrofit.create(AuthApi::class.java)
 

@@ -1,8 +1,8 @@
-package kr.sdbk.data.usecase_impl
+package kr.sdbk.data.usecase_impl.channel
 
 import jakarta.inject.Inject
 import kr.sdbk.domain.logic.repository.ChannelRepository
-import kr.sdbk.domain.logic.usecase.GetCategoriesUseCase
+import kr.sdbk.domain.logic.usecase.channel.GetCategoriesUseCase
 import kr.sdbk.domain.model.Category
 
 class GetCategoriesUseCaseImpl @Inject constructor(

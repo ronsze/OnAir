@@ -1,4 +1,4 @@
-package kr.sdbk.domain.logic.usecase
+package kr.sdbk.domain.logic.usecase.live
 
 import kr.sdbk.domain.model.Live
 

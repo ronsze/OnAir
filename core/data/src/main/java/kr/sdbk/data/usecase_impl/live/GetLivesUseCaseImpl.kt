@@ -1,7 +1,7 @@
-package kr.sdbk.data.usecase_impl
+package kr.sdbk.data.usecase_impl.live
 
 import kr.sdbk.domain.logic.repository.LiveRepository
-import kr.sdbk.domain.logic.usecase.GetLivesUseCase
+import kr.sdbk.domain.logic.usecase.live.GetLivesUseCase
 import kr.sdbk.domain.model.Live
 import javax.inject.Inject
 

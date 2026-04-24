@@ -11,6 +11,5 @@ internal sealed interface SplashIntent : Intent {
 }
 
 internal sealed interface SplashEffect : Effect {
-    data object NavigateToLogin : SplashEffect
     data object NavigateToHome : SplashEffect
 }

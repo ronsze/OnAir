@@ -1,7 +1,7 @@
-package kr.sdbk.data.usecase_impl
+package kr.sdbk.data.usecase_impl.live
 
 import kr.sdbk.domain.logic.repository.LiveRepository
-import kr.sdbk.domain.logic.usecase.GetStreamKeyUseCase
+import kr.sdbk.domain.logic.usecase.live.GetStreamKeyUseCase
 import javax.inject.Inject
 
 class GetStreamKeyUseCaseImpl @Inject constructor(
