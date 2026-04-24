@@ -76,9 +76,9 @@ private val mockContext: Context = spyk(ApplicationProvider.getApplicationContex
 For global/extension function mocking, use **StaticMocking** utilities:
 
 ```kotlin
-import kr.iamground.test_config.utils.mockkCookieManager
-import kr.iamground.test_config.utils.mockkCurrentVersion
-import kr.iamground.test_config.utils.unMockkCurrentVersion
+import kr.sdbk.test_config.utils.mockkCookieManager
+import kr.sdbk.test_config.utils.mockkCurrentVersion
+import kr.sdbk.test_config.utils.unMockkCurrentVersion
 
 @Before
 fun setup() {

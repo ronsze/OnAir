@@ -23,6 +23,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven(url = java.net.URI("https://devrepo.kakao.com/nexus/content/groups/public/"))
     }
 }
 
@@ -33,6 +34,7 @@ rootProject.name = "OnAir"
 include(":app")
 
 include(":core:common")
+include(":core:android-extensions")
 include(":core:designsystem")
 include(":core:navigation")
 include(":core:data")
@@ -50,6 +52,9 @@ include(":features:main:impl")
 
 include(":features:support:api")
 include(":features:support:impl")
+
+include(":features:auth:api")
+include(":features:auth:impl")
 
 include(":core:ui:coordinator")
 include(":core:test-config")

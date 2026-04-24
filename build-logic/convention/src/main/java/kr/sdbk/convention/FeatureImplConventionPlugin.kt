@@ -1,6 +1,10 @@
 package kr.sdbk.convention
 
 import com.android.build.api.dsl.LibraryExtension
+import kr.sdbk.convention.configuration.Modules.ANDROID_EXTENSIONS
+import kr.sdbk.convention.configuration.Modules.DESIGNSYSTEM
+import kr.sdbk.convention.configuration.Modules.DOMAIN_LOGIC
+import kr.sdbk.convention.configuration.Modules.UI_COORDINATOR
 import kr.sdbk.convention.configuration.applyPlugins
 import kr.sdbk.convention.configuration.configureUnitTest
 import kr.sdbk.convention.configuration.implementFeatureApiSelf
@@ -27,7 +31,10 @@ class FeatureImplConventionPlugin : Plugin<Project> {
         implementFeatureApiSelf()
 
         dependencies {
-            implementation(project(":core:ui:coordinator"))
+            implementation(project(DOMAIN_LOGIC))
+            implementation(project(DESIGNSYSTEM))
+            implementation(project(UI_COORDINATOR))
+            implementation(project(ANDROID_EXTENSIONS))
             implementation(libs.kotlinx.serialization.json)
         }
     }

@@ -1,5 +1,7 @@
 package kr.sdbk.convention
 
+import kr.sdbk.convention.configuration.Modules.DOMAIN_MODEL
+import kr.sdbk.convention.configuration.Modules.NAVIGATION
 import kr.sdbk.convention.configuration.api
 import kr.sdbk.convention.configuration.applyPlugins
 import kr.sdbk.convention.configuration.implementation
@@ -16,7 +18,8 @@ class FeatureApiConventionPlugin : Plugin<Project> {
         )
 
         dependencies {
-            api(project(":core:navigation"))
+            api(project(NAVIGATION))
+            implementation(project(DOMAIN_MODEL))
             implementation(libs.kotlinx.serialization.json)
         }
     }

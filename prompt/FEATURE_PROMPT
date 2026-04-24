@@ -4,6 +4,7 @@ TRIGGER: "xx화면 생성", "create xxScreen", "make xx screen", "xx피쳐 추�
 RULE: Parse user command -> identify SECTION -> only read that SECTION
 - If command contains "화면", "Screen", "screen" -> read [SECTION: SCREEN CREATION] only
 - If command contains "피쳐", "Feature", "feature" -> read [SECTION: FEATURE CREATION] only
+- If command contains "usecase", "use case", "useCase", "유스케이스" -> read [SECTION: USECASE CREATION] only
 
 BASE: CONVENTION_PROMPT (apply all naming/struct rules from it)
 MUST: CONVENTION_PROMPT rules ALWAYS apply to ALL generated code
@@ -205,4 +206,54 @@ entry<{N}Route> {
     {N}Screen(events)
 }
 ```
+================================================================================
+[SECTION: USECASE CREATION]
+TRIGGER: "{Name}UseCase 생성", "create {Name}UseCase", "make {Name} usecase"
+
+STRUCTURE:
+1. Standard UseCase (non-auth):
+core/domain/logic/src/main/java/kr/sdbk/domain/logic/{Name}UseCase.kt
+
+2. Auth UseCase (auth feature domain):
+core/domain/logic/src/main/java/kr/sdbk/domain/logic/auth/{Name}UseCase.kt
+
+FILES:
+
+1. {Name}UseCase.kt (interface + impl in SAME FILE):
+```kotlin
+package kr.sdbk.domain.logic  // or kr.sdbk.domain.logic.auth for auth
+
+import jakarta.inject.Inject
+
+interface {Name}UseCase {
+    // suspend determined by user request
+    operator fun invoke(params...): ReturnType
+}
+
+class {Name}UseCaseImpl @Inject constructor(
+    // add dependencies here if needed
+) : {Name}UseCase {
+    
+    override operator fun invoke(params...): ReturnType {
+        // implementation
+    }
+}
+```
+
+2. UseCaseModule.kt (add binds in core/data):
+core/data/src/main/java/kr/sdbk/data/di/UseCaseModule.kt
+
+```kotlin
+@Binds
+abstract fun bind{Name}UseCase(impl: {Name}UseCaseImpl): {Name}UseCase
+```
+
+RULES:
+- pkg: kr.sdbk.domain.logic for standard, kr.sdbk.domain.logic.auth for auth
+- modifier: interface = public (no modifier), impl = public (no modifier)
+- naming: {Name}UseCase (interface), {Name}UseCaseImpl (implementation)
+- function: operator fun invoke() with params/return as specified by user
+- suspend: add if user requests async/suspend function
+- BOTH interface and impl in SAME FILE
+- DI module ALWAYS in core/data/src/main/java/kr/sdbk/data/di/UseCaseModule.kt
 ================================================================================

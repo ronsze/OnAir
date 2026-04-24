@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation(projects.features.main.api)
+    implementation(projects.features.auth.api)
 }

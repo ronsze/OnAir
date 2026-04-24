@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="kr.sdbk.onair" />
+                  <option name="mobileSdkAppId" value="1:832775358965:android:02d5fa6b357f22a939b8bc" />
+                  <option name="projectId" value="onair-dev-408f9" />
+                  <option name="projectNumber" value="832775358965" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
