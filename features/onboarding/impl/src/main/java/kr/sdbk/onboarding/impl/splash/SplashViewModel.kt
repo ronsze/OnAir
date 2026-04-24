@@ -5,7 +5,9 @@ import jakarta.inject.Inject
 import kr.sdbk.coordinator.viewmodel.BaseViewModel
 
 @HiltViewModel
-internal class SplashViewModel @Inject constructor() : BaseViewModel<SplashState, SplashIntent, SplashEffect>(
+internal class SplashViewModel @Inject constructor(
+
+) : BaseViewModel<SplashState, SplashIntent, SplashEffect>(
     initialState = SplashState
 ) {
     override fun handleIntent(intent: SplashIntent) {
@@ -15,6 +17,6 @@ internal class SplashViewModel @Inject constructor() : BaseViewModel<SplashState
     }
 
     private fun onPermissionHandled(isGranted: Boolean) {
-
+        sendEffect(SplashEffect.NavigateToHome)
     }
 }

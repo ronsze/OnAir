@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">홈</string>
+    <string name="following">팔로잉</string>
+    <string name="lives">라이브</string>
+    <string name="my">마이페이지</string>
+</resources>
