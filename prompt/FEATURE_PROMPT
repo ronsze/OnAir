@@ -23,6 +23,13 @@ features/{feature}/
     └── src/main/java/kr/sdbk/{feature}/impl/
         └── {Feature}Navigator.kt      # OnAirEntryProviderScope.{feature}Navigator()
 
+USECASE + NETWORK LINK RULE (MANDATORY):
+- When creating or updating a UseCase that requires API communication, ALWAYS connect network layer together.
+- In `core/network/data_source`, select the appropriate existing data source first; if none fits, create a new data source.
+- Select existing API interface under `core/network/api` first; if missing, create a new API interface.
+- API interface must be wired as Retrofit service and injected through DI (`NetworkModule`) so data source can call it.
+- Implement UseCase with connected repository/data_source flow, not placeholder/stub network logic.
+
 FILES:
 
 1. api/build.gradle.kts:
