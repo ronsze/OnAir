@@ -68,4 +68,6 @@ dependencies {
 
     implementation(libs.kakao.login)
     implementation(libs.naver.login)
+
+    implementation(libs.coil.compose)
 }

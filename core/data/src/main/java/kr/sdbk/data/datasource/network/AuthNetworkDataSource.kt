@@ -1,16 +1,10 @@
 package kr.sdbk.data.datasource.network
 
-import kr.sdbk.domain.model.SocialType
-import kr.sdbk.domain.model.User
+import kr.sdbk.domain.model.user_auth.AuthToken
 
 interface AuthNetworkDataSource {
-    fun getCurrentUser(): User?
-
-    suspend fun loginWithEmail(email: String, password: String)
-    suspend fun loginWithSocial(token: String, socialType: SocialType)
-
-    suspend fun signUpWithEmail(email: String, password: String)
-
+    suspend fun login(): AuthToken
     suspend fun logout()
     suspend fun deleteAccount()
+    suspend fun refresh(refreshToken: String): AuthToken
 }

@@ -17,7 +17,7 @@ import kr.sdbk.auth.impl.login.module.rememberLoginClient
 import kr.sdbk.designsystem.component.VerticalSpacer
 import kr.sdbk.designsystem.component.WeightSpacer
 import kr.sdbk.designsystem.preview.FullScreenPreview
-import kr.sdbk.domain.model.SocialType
+import kr.sdbk.domain.model.user_auth.SocialType
 
 internal data class LoginEvents(
     val navigateToHome: () -> Unit,

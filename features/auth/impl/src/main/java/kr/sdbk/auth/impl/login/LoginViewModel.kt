@@ -6,9 +6,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.launch
 import kr.sdbk.coordinator.viewmodel.BaseViewModel
-import kr.sdbk.domain.logic.usecase.auth.LoginUseCase
-import kr.sdbk.domain.logic.usecase.auth.SignUpUseCase
-import kr.sdbk.domain.model.SocialType
+import kr.sdbk.domain.logic.usecase.user_auth.LoginUseCase
+import kr.sdbk.domain.logic.usecase.user_auth.SignUpUseCase
+import kr.sdbk.domain.model.user_auth.SocialType
 
 @HiltViewModel
 internal class LoginViewModel @Inject constructor(

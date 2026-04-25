@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import coil3.annotation.ExperimentalCoilApi
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 import kr.sdbk.coordinator.utils.ErrorMonitor
@@ -17,6 +18,7 @@ import kr.sdbk.onair.state.rememberOnAirAppState
 import kr.sdbk.onboarding.api.SplashRoute
 
 @AndroidEntryPoint
+@OptIn(ExperimentalCoilApi::class)
 class MainActivity : ComponentActivity() {
     @Inject lateinit var loadingMonitor: LoadingMonitor
     @Inject lateinit var errorMonitor: ErrorMonitor

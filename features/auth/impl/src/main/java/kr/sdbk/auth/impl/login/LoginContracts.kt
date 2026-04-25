@@ -3,7 +3,7 @@ package kr.sdbk.auth.impl.login
 import kr.sdbk.coordinator.viewmodel.Effect
 import kr.sdbk.coordinator.viewmodel.Intent
 import kr.sdbk.coordinator.viewmodel.State
-import kr.sdbk.domain.model.SocialType
+import kr.sdbk.domain.model.user_auth.SocialType
 
 internal data class LoginState(
     val email: String = "",

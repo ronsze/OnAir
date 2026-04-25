@@ -3,7 +3,7 @@ package kr.sdbk.auth.impl.login.module
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import kr.sdbk.domain.model.SocialType
+import kr.sdbk.domain.model.user_auth.SocialType
 
 @Composable
 internal fun rememberLoginClient(): LoginClient {

@@ -25,7 +25,12 @@ fun OnAirEntryProviderScope.mainNavigator(navigator: OnAirNavigator) {
     }
 
     entry<TopLevelDestinations.LivesNavKey> {
-        val events = remember { LiveEvents }
+        val events = remember {
+            LiveEvents(
+                navigateToLiveDetail = {},
+                navigateToSearch = {},
+            )
+        }
         LiveScreen(events)
     }
 

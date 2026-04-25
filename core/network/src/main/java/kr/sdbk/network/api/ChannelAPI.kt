@@ -1,6 +1,6 @@
 package kr.sdbk.network.api
 
-import kr.sdbk.network.model.CategoryDTO
+import kr.sdbk.network.model.channel.CategoryDTO
 import retrofit2.http.GET
 
 interface ChannelAPI {

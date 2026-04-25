@@ -3,7 +3,6 @@ package kr.sdbk.onboarding.impl.splash
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kr.sdbk.coordinator.viewmodel.BaseViewModel
-import kr.sdbk.domain.logic.usecase.auth.GetUserUseCase
 
 @HiltViewModel
 internal class SplashViewModel @Inject constructor(

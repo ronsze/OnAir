@@ -10,9 +10,9 @@ import kr.sdbk.data.usecase_impl.auth.SignUpUseCaseImpl
 import kr.sdbk.data.usecase_impl.channel.GetCategoriesUseCaseImpl
 import kr.sdbk.data.usecase_impl.live.GetLivesUseCaseImpl
 import kr.sdbk.data.usecase_impl.live.GetStreamKeyUseCaseImpl
-import kr.sdbk.domain.logic.usecase.auth.GetUserUseCase
-import kr.sdbk.domain.logic.usecase.auth.LoginUseCase
-import kr.sdbk.domain.logic.usecase.auth.SignUpUseCase
+import kr.sdbk.domain.logic.usecase.user_auth.GetUserUseCase
+import kr.sdbk.domain.logic.usecase.user_auth.LoginUseCase
+import kr.sdbk.domain.logic.usecase.user_auth.SignUpUseCase
 import kr.sdbk.domain.logic.usecase.channel.GetCategoriesUseCase
 import kr.sdbk.domain.logic.usecase.live.GetLivesUseCase
 import kr.sdbk.domain.logic.usecase.live.GetStreamKeyUseCase

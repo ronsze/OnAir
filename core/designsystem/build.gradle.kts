@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "kr.sdbk.designsystem"
 }
+
+dependencies {
+    implementation(libs.coil.compose)
+}

@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import kr.sdbk.domain.model.SocialType
+import kr.sdbk.domain.model.user_auth.SocialType
 
 @Composable
 internal fun SocialLoginColumn(

@@ -60,10 +60,14 @@ object NetworkModule {
     @ChzzkApi
     @Provides
     @Singleton
-    fun provideChzzkRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideChzzkRetrofit(
+        okHttpClient: OkHttpClient,
+        json: Json
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(APIConstants.BASE_URL)
             .client(okHttpClient)
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 }

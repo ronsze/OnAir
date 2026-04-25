@@ -1,7 +1,7 @@
 package kr.sdbk.network.mapper
 
-import kr.sdbk.domain.model.Category
-import kr.sdbk.network.model.CategoryDTO
+import kr.sdbk.domain.model.channel.Category
+import kr.sdbk.network.model.channel.CategoryDTO
 
 object ChannelMapper {
     fun CategoryDTO.toDomain() = Category(
