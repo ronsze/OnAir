@@ -7,51 +7,33 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Firebase Admin 초기화
-const serviceAccount = require('./serviceAccountKey.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// 로그인 리다이렉트 페이지
+app.get('/login/redirect', (req, res) => {
+  const { code, state, error, error_description } = req.query;
 
-// Naver/Kakao userId 가져오기 함수
-async function getUserId(accessToken, socialType) {
-  if (socialType === 'naver') {
-    const res = await fetch('https://openapi.naver.com/v1/nid/me', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    const data = await res.json();
-    if (data.response && data.response.id) return `naver_${data.response.id}`;
-    throw new Error('Naver token invalid');
-  } else if (socialType === 'kakao') {
-    const res = await fetch('https://kapi.kakao.com/v2/user/me', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    const data = await res.json();
-    if (data.id) return `kakao_${data.id}`;
-    throw new Error('Kakao token invalid');
-  } else {
-    throw new Error('Unsupported socialType');
+  if (error) {
+    return res.status(400).send(`
+      <html>
+        <head><meta charset="utf-8" /></head>
+        <body>
+          <h2>로그인 실패</h2>
+          <p>${error}</p>
+          <p>${error_description || ''}</p>
+        </body>
+      </html>
+    `);
   }
-}
 
-// Custom Token 생성 API
-app.post('/getCustomToken', async (req, res) => {
-  try {
-    const { accessToken, socialType } = req.body;
-    if (!accessToken || !socialType)
-      return res.status(400).json({ error: 'accessToken & socialType required' });
-
-    // 소셜 토큰으로 userId 가져오기
-    const uid = await getUserId(accessToken, socialType);
-
-    // Firebase Custom Token 생성
-    const customToken = await admin.auth().createCustomToken(uid);
-
-    res.json({ token: customToken });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
+  return res.send(`
+    <html>
+      <head><meta charset="utf-8" /></head>
+      <body>
+        <h2>로그인 리다이렉트 완료</h2>
+        <p>code: ${code || ''}</p>
+        <p>state: ${state || ''}</p>
+      </body>
+    </html>
+  `);
 });
 
 // 서버 실행
