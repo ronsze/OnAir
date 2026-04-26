@@ -8,6 +8,5 @@ class SignUpUseCaseImpl @Inject constructor(
     private val repository: AuthRepository
 ) : SignUpUseCase {
     override suspend operator fun invoke(email: String, password: String) {
-        repository.signUpWithEmail(email, password)
     }
 }

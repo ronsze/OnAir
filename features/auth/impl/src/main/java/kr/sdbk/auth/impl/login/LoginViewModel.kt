@@ -41,7 +41,7 @@ internal class LoginViewModel @Inject constructor(
         val password = uiState.value.password
         viewModelScope.launch {
             runTask {
-                loginUseCase(email, password)
+                loginUseCase()
             }.onSuccess {
                 sendEffect(LoginEffect.NavigateToHome)
             }.onBasicFailure {
@@ -72,7 +72,7 @@ internal class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             runTask {
                 val token = result.getOrThrow()
-                loginUseCase(token, socialType)
+                loginUseCase()
             }.onSuccess {
                 sendEffect(LoginEffect.NavigateToHome)
             }.onBasicFailure {
