@@ -1,20 +1,22 @@
 package kr.sdbk.network.model.live
 
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 
+@OptIn(InternalSerializationApi::class)
 @Serializable
 data class LiveDTO(
-    val live_id: Int,
-    val live_title: String,
-    val live_thumbnail_image_url: String,
-    val concurrent_user_count: Int,
-    val open_date: String,
+    val liveId: Int,
+    val liveTitle: String,
+    val liveThumbnailImageUrl: String,
+    val concurrentUserCount: Int,
+    val openDate: String,
     val adult: Boolean,
-    val tags: List<String>,
-    val category_type: String,
-    val live_category: String,
-    val live_category_value: String,
-    val channel_id: String,
-    val channel_name: String,
-    val channel_image_url: String
+    val tags: List<String> = emptyList(),
+    val categoryType: String = "",
+    val liveCategory: String = "",
+    val liveCategoryValue: String = "",
+    val channelId: String,
+    val channelName: String,
+    val channelImageUrl: String
 )

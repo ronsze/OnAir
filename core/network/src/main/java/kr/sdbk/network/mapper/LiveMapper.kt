@@ -12,18 +12,18 @@ object LiveMapper {
     )
 
     fun LiveDTO.toDomain() = Live(
-        liveId = live_id,
-        liveTitle = live_title,
-        liveThumbnailImageUrl = live_thumbnail_image_url,
-        concurrentUserCount = concurrent_user_count,
-        openDate = open_date,
+        liveId = liveId,
+        liveTitle = liveTitle,
+        liveThumbnailImageUrl = liveThumbnailImageUrl,
+        concurrentUserCount = concurrentUserCount,
+        openDate = openDate,
         adult = adult,
         tags = tags,
-        categoryType = category_type,
-        liveCategory = live_category,
-        liveCategoryValue = live_category_value,
-        channelId = channel_id,
-        channelName = channel_name,
-        channelImageUrl = channel_image_url
+        categoryType = categoryType,
+        liveCategory = liveCategory,
+        liveCategoryValue = liveCategoryValue,
+        channelId = channelId,
+        channelName = channelName,
+        channelImageUrl = channelImageUrl
     )
 }

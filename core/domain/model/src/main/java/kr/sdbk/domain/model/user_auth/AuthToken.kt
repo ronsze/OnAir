@@ -1,8 +1,11 @@
 package kr.sdbk.domain.model.user_auth
 
-class AuthToken(
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AuthToken(
     val accessToken: String,
     val refreshToken: String,
-    val expiresIn: Long,
+    val expireAt: Long,
     val tokenType: String
 )

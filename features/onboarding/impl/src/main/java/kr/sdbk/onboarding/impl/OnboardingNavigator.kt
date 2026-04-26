@@ -1,7 +1,7 @@
 package kr.sdbk.onboarding.impl
 
 import androidx.compose.runtime.remember
-import kr.sdbk.main.api.navigateToHome
+import kr.sdbk.auth.api.navigateToLogin
 import kr.sdbk.navigation.OnAirEntryProviderScope
 import kr.sdbk.navigation.OnAirNavigator
 import kr.sdbk.onboarding.api.MaintenanceRoute
@@ -17,7 +17,7 @@ fun OnAirEntryProviderScope.onboardingNavigator(
     entry<SplashRoute> {
         val events = remember {
             SplashEvents(
-                navigateToHome = navigator::navigateToHome
+                navigateToLogin = navigator::navigateToLogin
             )
         }
         SplashScreen(events)

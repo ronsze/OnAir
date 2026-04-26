@@ -29,6 +29,6 @@ internal class SplashViewModel @Inject constructor(
     }
 
     private fun checkVersion() {
-        sendEffect(SplashEffect.NavigateToHome)
+        sendEffect(SplashEffect.NavigateToLogin)
     }
 }

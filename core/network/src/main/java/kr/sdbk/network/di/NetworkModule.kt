@@ -7,6 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Qualifier
 import kotlinx.serialization.json.Json
 import kr.sdbk.network.consts.APIConstants
+import kr.sdbk.network.interceptor.AuthInterceptor
+import kr.sdbk.network.interceptor.CurlLoggingInterceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,27 +29,52 @@ annotation class ChzzkApi
 object NetworkModule {
     @Provides
     @Singleton
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Provides
+    @Singleton
     fun provideJson(): Json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
     }
 
+    @AuthApi
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideTokenOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        curlLoggingInterceptor: CurlLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                }
-            ).build()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(curlLoggingInterceptor)
+            .build()
+    }
+
+    @ChzzkApi
+    @Provides
+    @Singleton
+    fun provideChzzkOkHttpClient(
+        authInterceptor: AuthInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor,
+        curlLoggingInterceptor: CurlLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(curlLoggingInterceptor)
+            .build()
     }
 
     @AuthApi
     @Provides
     @Singleton
     fun provideAuthRetrofit(
-        okHttpClient: OkHttpClient,
+        @AuthApi okHttpClient: OkHttpClient,
         json: Json
     ): Retrofit {
         return Retrofit.Builder()
@@ -61,7 +88,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideChzzkRetrofit(
-        okHttpClient: OkHttpClient,
+        @ChzzkApi okHttpClient: OkHttpClient,
         json: Json
     ): Retrofit {
         return Retrofit.Builder()

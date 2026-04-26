@@ -5,9 +5,9 @@ import kr.sdbk.network.model.channel.CategoryDTO
 
 object ChannelMapper {
     fun CategoryDTO.toDomain() = Category(
-        categoryType = category_type,
-        categoryId = category_id,
-        categoryValue = category_value,
-        posterImageUrl = poster_image_url,
+        categoryType = categoryType,
+        categoryId = categoryId,
+        categoryValue = categoryValue,
+        posterImageUrl = posterImageUrl,
     )
 }

@@ -1,9 +1,17 @@
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.onair.android.library)
     alias(libs.plugins.onair.hilt)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.secrets)
 }
+
+val localPropertiesFile: File = rootProject.file("local.properties")
+val localProperties = Properties()
+localProperties.load(FileInputStream(localPropertiesFile))
 
 android {
     namespace = "kr.sdbk.network"
@@ -13,7 +21,7 @@ android {
 
 dependencies {
     implementation(projects.core.data)
-    implementation(projects.core.domain.model)
+    implementation(projects.core.domain.logic)
 
     // Firebase
     implementation(platform(libs.firebase.bom))

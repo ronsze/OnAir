@@ -20,4 +20,5 @@ internal abstract class UtilsModule {
     @Binds
     @Singleton
     abstract fun bindsErrorMonitor(impl: ErrorMonitorImpl): ErrorMonitor
+
 }

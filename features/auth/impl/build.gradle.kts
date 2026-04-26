@@ -1,6 +1,15 @@
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.onair.feature.impl)
     alias(libs.plugins.google.secrets)
+}
+
+val localPropertiesFile: File = rootProject.file("local.properties")
+val localProperties = Properties().apply {
+    load(FileInputStream(localPropertiesFile))
 }
 
 android {
@@ -14,7 +23,7 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
-    
+
     // Social Login
     implementation(libs.kakao.login)
     implementation(libs.naver.login)

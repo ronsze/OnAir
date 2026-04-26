@@ -12,9 +12,9 @@ object AuthMapper {
     )
 
     fun AuthTokenDTO.toDomain() = AuthToken(
-        accessToken = access_token,
-        refreshToken = refresh_token,
-        expiresIn = expires_in,
-        tokenType = token_type
+        accessToken = accessToken,
+        refreshToken = refreshToken,
+        expireAt = System.currentTimeMillis() + expiresIn * 1000,
+        tokenType = tokenType
     )
 }

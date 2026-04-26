@@ -7,9 +7,11 @@ import dagger.hilt.components.SingletonComponent
 import kr.sdbk.data.datasource.network.ChannelNetworkDataSource
 import kr.sdbk.data.datasource.network.LiveNetworkDataSource
 import kr.sdbk.data.datasource.network.AuthNetworkDataSource
+import kr.sdbk.data.datasource.network.TokenNetworkDataSource
+import kr.sdbk.network.datasource.AuthNetworkDataSourceImpl
 import kr.sdbk.network.datasource.ChannelNetworkDataSourceImpl
 import kr.sdbk.network.datasource.LiveNetworkDataSourceImpl
-import kr.sdbk.network.datasource.AuthNetworkDataSourceImpl
+import kr.sdbk.network.datasource.TokenNetworkDataSourceImpl
 import javax.inject.Singleton
 
 @Module
@@ -26,4 +28,8 @@ internal abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindsChannelDataSource(impl: ChannelNetworkDataSourceImpl): ChannelNetworkDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsTokenDataSource(impl: TokenNetworkDataSourceImpl): TokenNetworkDataSource
 }
