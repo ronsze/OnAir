@@ -8,32 +8,30 @@ app.use(cors());
 app.use(express.json());
 
 // 로그인 리다이렉트 페이지
-app.get('/login/redirect', (req, res) => {
+app.get('/:authType/callback', (req, res) => {
+  const { authType } = req.params;
   const { code, state, error, error_description } = req.query;
 
   if (error) {
-    return res.status(400).send(`
-      <html>
-        <head><meta charset="utf-8" /></head>
-        <body>
-          <h2>로그인 실패</h2>
-          <p>${error}</p>
-          <p>${error_description || ''}</p>
-        </body>
-      </html>
-    `);
+    return res.status(400).json({
+      authType: String(authType),
+      error: String(error),
+      errorDescription: String(error_description || ''),
+    });
   }
 
-  return res.send(`
-    <html>
-      <head><meta charset="utf-8" /></head>
-      <body>
-        <h2>로그인 리다이렉트 완료</h2>
-        <p>code: ${code || ''}</p>
-        <p>state: ${state || ''}</p>
-      </body>
-    </html>
-  `);
+  if (!code || !state) {
+    return res.status(400).json({
+      authType: String(authType),
+      error: 'code and state are required',
+    });
+  }
+
+  return res.json({
+    authType: String(authType),
+    code: String(code),
+    state: String(state),
+  });
 });
 
 // 서버 실행
