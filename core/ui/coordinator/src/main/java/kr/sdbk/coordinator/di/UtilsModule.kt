@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class UtilsModule {
+internal abstract class UtilsModuleBinds {
     @Binds
     @Singleton
     abstract fun bindsLoadingMonitor(impl: LoadingMonitorImpl): LoadingMonitor
@@ -20,5 +20,4 @@ internal abstract class UtilsModule {
     @Binds
     @Singleton
     abstract fun bindsErrorMonitor(impl: ErrorMonitorImpl): ErrorMonitor
-
 }

@@ -14,7 +14,7 @@ object LiveMapper {
     fun LiveDTO.toDomain() = Live(
         liveId = liveId,
         liveTitle = liveTitle,
-        liveThumbnailImageUrl = liveThumbnailImageUrl,
+        liveThumbnailImageUrl = liveThumbnailImageUrl.replace("{type}", "720"),
         concurrentUserCount = concurrentUserCount,
         openDate = openDate,
         adult = adult,

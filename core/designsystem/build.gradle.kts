@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.onair.android.library)
     alias(libs.plugins.onair.compose)
+    alias(libs.plugins.onair.hilt)
 }
 
 android {
@@ -8,5 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(libs.coil.compose)
+    implementation(projects.core.androidExtensions)
+
+    implementation(libs.bundles.coil)
 }

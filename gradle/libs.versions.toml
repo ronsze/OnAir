@@ -77,6 +77,7 @@ okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.
 
 # Image Loading
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 
 # Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version = "34.10.0" }
@@ -126,3 +127,4 @@ onair-hilt = { id = "onair.hilt" }
 compose = ["compose-ui", "compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-material3"]
 navigation = ["androidx-navigation3-ui", "androidx-navigation3-runtime"]
 google-login = ["googleid", "androidx-credentials", "androidx-credentials-play-services-auth"]
+coil = ["coil-compose", "coil-network"]
