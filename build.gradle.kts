@@ -10,4 +10,8 @@ plugins {
     alias(libs.plugins.hilt) apply false
 
     alias(libs.plugins.kotlin.serialization) apply false
+
+    alias(libs.plugins.google.secrets) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.google.firebase.crashlytics) apply false
 }

@@ -9,7 +9,7 @@ android {
 
 dependencies {
     implementation(projects.core.common)
-    implementation(projects.core.domain)
+    implementation(projects.core.domain.logic)
     implementation(projects.core.ui.coordinator)
 
     api(libs.junit)
