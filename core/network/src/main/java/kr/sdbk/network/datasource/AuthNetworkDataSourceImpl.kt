@@ -3,8 +3,10 @@ package kr.sdbk.network.datasource
 import jakarta.inject.Inject
 import kr.sdbk.data.datasource.network.AuthNetworkDataSource
 import kr.sdbk.domain.model.user_auth.AuthToken
+import kr.sdbk.domain.model.user_data.User
 import kr.sdbk.network.BuildConfig
 import kr.sdbk.network.api.AuthApi
+import kr.sdbk.network.consts.APIResultCode
 import kr.sdbk.network.di.ChzzkApi
 import kr.sdbk.network.mapper.AuthMapper.toDomain
 import kr.sdbk.network.model.user_auth.LoginRequestDTO
@@ -17,7 +19,9 @@ internal class AuthNetworkDataSourceImpl @Inject constructor(
         private const val LOGIN_GRANT_TYPE = "authorization_code"
     }
 
-    private val chzzkApi = chzzkRetrofit.create(AuthApi::class.java)
+    private val api = chzzkRetrofit.create(AuthApi::class.java)
+
+    override suspend fun getCurrentUser(): User? = api.getCurrentUser().content.toDomain()
 
     override suspend fun login(code: String): AuthToken {
         val clientId = BuildConfig.chzzkClientId
@@ -31,7 +35,7 @@ internal class AuthNetworkDataSourceImpl @Inject constructor(
             state = state
         )
 
-        return chzzkApi.login(request).content.toDomain()
+        return api.login(request).content.toDomain()
     }
 
     override suspend fun logout() {
