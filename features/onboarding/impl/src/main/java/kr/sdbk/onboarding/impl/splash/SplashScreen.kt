@@ -13,7 +13,8 @@ import kotlinx.coroutines.delay
 import kr.sdbk.designsystem.preview.FullScreenPreview
 
 internal data class SplashEvents(
-    val navigateToLogin: () -> Unit
+    val navigateToLogin: () -> Unit,
+    val navigateToHome: () -> Unit
 )
 
 internal data class SplashUiEvents(
@@ -37,6 +38,7 @@ internal fun SplashScreen(
         viewModel.effect.collect { effect ->
             when (effect) {
                 is SplashEffect.NavigateToLogin -> events.navigateToLogin()
+                is SplashEffect.NavigateToHome -> events.navigateToHome()
             }
         }
     }

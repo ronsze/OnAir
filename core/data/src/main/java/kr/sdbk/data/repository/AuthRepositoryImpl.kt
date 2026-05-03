@@ -8,7 +8,14 @@ import kr.sdbk.domain.model.user_data.User
 internal class AuthRepositoryImpl @Inject constructor(
     private val networkDataSource: AuthNetworkDataSource
 ) : AuthRepository {
-    override fun getCurrentUser(): User? = null
+    private var currentUser: User? = null
+
+    override suspend fun getCurrentUser(forceUpdate: Boolean): User? {
+        if (forceUpdate) {
+            currentUser = networkDataSource.getCurrentUser()
+        }
+        return currentUser
+    }
 
     override suspend fun login(code: String) =
         networkDataSource.login(code)

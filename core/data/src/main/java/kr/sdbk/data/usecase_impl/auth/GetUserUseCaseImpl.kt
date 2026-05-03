@@ -8,5 +8,6 @@ import kr.sdbk.domain.model.user_data.User
 class GetUserUseCaseImpl @Inject constructor(
     private val repository: AuthRepository
 ) : GetUserUseCase {
-    override operator fun invoke(): User? = repository.getCurrentUser()
+    override suspend operator fun invoke(forceUpdate: Boolean): User? =
+        repository.getCurrentUser(forceUpdate)
 }

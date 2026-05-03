@@ -1,12 +1,15 @@
 package kr.sdbk.onboarding.impl.splash
 
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
+import kotlinx.coroutines.launch
 import kr.sdbk.coordinator.viewmodel.BaseViewModel
+import kr.sdbk.domain.logic.usecase.user_auth.GetUserUseCase
 
 @HiltViewModel
 internal class SplashViewModel @Inject constructor(
-
+    private val getUserUseCase: GetUserUseCase
 ) : BaseViewModel<SplashState, SplashIntent, SplashEffect>(
     initialState = SplashState
 ) {
@@ -20,7 +23,7 @@ internal class SplashViewModel @Inject constructor(
         if (isGranted) {
             checkMaintenance()
         } else {
-            //  TODO
+
         }
     }
 
@@ -29,6 +32,20 @@ internal class SplashViewModel @Inject constructor(
     }
 
     private fun checkVersion() {
-        sendEffect(SplashEffect.NavigateToLogin)
+        checkUser()
+    }
+
+    private fun checkUser() {
+        viewModelScope.launch {
+            runTask(withLoading = false) {
+                getUserUseCase(forceUpdate = true)
+            }.onSuccess { user ->
+                if (user == null) {
+                    sendEffect(SplashEffect.NavigateToLogin)
+                } else {
+                    sendEffect(SplashEffect.NavigateToHome)
+                }
+            }.onBasicFailure {}
+        }
     }
 }
